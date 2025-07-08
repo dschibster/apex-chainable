@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
-
 echo "Starting script to create new package version"
-
+sf plugins install @salesforce/plugins-packaging
 echo "sfdx force:package:beta:version:create -p PACKAGE_ID -f config/project-scratch-def.json -x -v devhub -c --json -w 50 | tee result.json"
 
 PACKAGE_ID=$( jq -r 'first(.packageAliases[])' sfdx-project.json )
