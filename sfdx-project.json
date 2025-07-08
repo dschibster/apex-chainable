@@ -1,11 +1,18 @@
 {
-    "packageDirectories": [
-        {
-          "path": "force-app",
-          "default": true
-        }
-    ],
-    "namespace": "",
-    "sfdcLoginUrl": "https://login.salesforce.com",
-    "sourceApiVersion": "64.0"
+  "packageDirectories": [
+    {
+      "versionName": "apex-chainable 1.0",
+      "versionNumber": "1.0.0",
+      "path": "force-app",
+      "default": true,
+      "package": "apex-chainable",
+      "versionDescription": ""
+    }
+  ],
+  "namespace": "",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "64.0",
+  "packageAliases": {
+    "apex-chainable": "0HoJ8000000k9cBKAQ"
+  }
 }
