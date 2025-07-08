@@ -3,14 +3,11 @@ set -euo pipefail
 
 echo "Starting script to create new package version"
 
-echo "sfdx force:package:beta:version:create -p PACKAGE_ID -f config/project-scratch-def.json -x -v devhub -c --json -w 50 | tee result.json"
+echo "sf package version create -p PACKAGE_ID -f config/project-scratch-def.json -x -v devhub -c --json -w 50"
 
 PACKAGE_ID=$( jq -r 'first(.packageAliases[])' sfdx-project.json )
 
-echo "Package Id: $PACKAGE_ID"
-
-sfdx force:package:beta:version:create -p $PACKAGE_ID -f config/project-scratch-def.json -x -v devhub -c --json -w 50 | tee result.json
-
+sf package version create  -p $PACKAGE_ID -f config/project-scratch-def.json -x -v devhub -c --json -w 50 > result.json
 
 cat result.json | jq -r '.result.SubscriberPackageVersionId' > packgeversionid.txt
 
@@ -23,13 +20,14 @@ fi
 echo "New Package Version Id: $PACKAGEVERSIONID"
 
 echo "Updating docs"
-#updates README with new installation id
-sed -i "s/04t.\{15\}/$PACKAGEVERSIONID/g" README.md
+#updates docs with new installation id
 sed -i "s/04t.\{15\}/$PACKAGEVERSIONID/g" docs/installation.md
 
+#updates README with new installation id
+sed -i "s/04t.\{15\}/$PACKAGEVERSIONID/g" README.md
 
-git add README.md
 git add docs/installation.md
+git add README.md
 git add sfdx-project.json
 git config --local user.email "action@github.com"
 git config --local user.name "GitHub Action Bot"
