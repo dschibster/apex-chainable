@@ -1,13 +1,13 @@
 public abstract class ChainableBatch extends Chainable
                                      implements Database.Batchable<Object>, Database.Stateful, Database.AllowsCallouts {
-    // ABSTRACT
+    //ABSTRACT
 
     protected abstract Iterable<Object> start(Context ctx);
     protected abstract void execute(Context ctx, Iterable<Object> scope);
     protected abstract void finish(Context ctx);
 
 
-    // PUBLIC
+    //PUBLIC
 
     public Iterable<Object> start(Database.BatchableContext ctx) {
         return start( new Context(ctx) );
